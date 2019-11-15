@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">GIT Search</mat-toolbar>
+<div class="container">
+    <mat-form-field class="profile-full-width">
+        <input matInput placeholder="Enter User Name" [(ngModel)]="profile">
+    </mat-form-field>
+    <button class="profileButton" mat-raised-button color="primary" (click)="search()">Search</button>
+
+    <div>
+        <mat-spinner *ngIf=showSpinner></mat-spinner>
+        <div class="errorClass" *ngIf="errorMssg">
+
+            <mat-card-subtitle>
+                <p>NO DATA FOUND</p>
+            </mat-card-subtitle>
+            <mat-progress-bar mode="query" color="accent"></mat-progress-bar>
+
+        </div>
+        <div *ngIf="response">
+            <mat-card class="successClass">
+                <mat-card-header>
+                    <mat-card-title>{{response.name}}</mat-card-title>
+                    <mat-card-subtitle>{{response.login}}</mat-card-subtitle>
+                    <mat-card-subtitle>
+                        <a href={{response.html_url}} target="_blank">GitHub Website</a>
+                        <p>{{response.email}}</p>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src={{response.avatar_url}} alt="Photo">
+                <mat-card-content>
+                    <p>{{response.bio}}</p>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
