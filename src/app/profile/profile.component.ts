@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
   response: any;
   durationInSeconds = 5;
   showSpinner = false;
-  errorMssg = false;
+  errorMssg = false; // For checking user exist or not
 
   constructor(private service: ProfileServiceService, private snackBar: MatSnackBar) {
   }
@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
       },
         err => {
           this.showSpinner = false;
-          this.errorMssg = true;
+          this.errorMssg = true; // No user found
           this.response = false;
           this.snackBar.open(err.error.message, ' close ', {
             duration: 2000,
