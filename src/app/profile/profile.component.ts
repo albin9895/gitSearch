@@ -17,13 +17,12 @@ export class ProfileComponent implements OnInit {
   constructor(private service: ProfileServiceService, private snackBar: MatSnackBar) {
   }
   search() {
-    if(!this.profile) {
+    if (!this.profile) {
       this.snackBar.open('Provide Data', ' close ', {
         duration: 2000,
         verticalPosition: 'top'
-        
       });
-      return ;
+      return;
     }
     const localData = localStorage.getItem(this.profile);
     if (localData) {
@@ -31,7 +30,6 @@ export class ProfileComponent implements OnInit {
       this.errorMssg = false;
     } else {
       this.showSpinner = true;
-
       this.service.getProfileInfo(this.profile).subscribe(data => {
         this.response = data;
         localStorage.setItem(this.profile, JSON.stringify(this.response));
@@ -48,9 +46,6 @@ export class ProfileComponent implements OnInit {
           });
         });
     }
-    // tslint:disable-next-line:align
-    
-
   }
   ngOnInit() {
   }

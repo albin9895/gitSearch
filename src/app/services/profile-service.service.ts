@@ -5,10 +5,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileServiceService {
 
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient) {
 
-   }
-   getProfileInfo(userName){
-     return this.http.get('https://api.github.com/users/' + userName+ '?access_token=beba3c150021bfb49769385927dfa59fac2cdf04');
-   }
+  }
+  getProfileInfo(userName) {
+    return this.http.get('https://api.github.com/users/' + userName + '?access_token=beba3c150021bfb49769385927dfa59fac2cdf04');
+  }
 }
