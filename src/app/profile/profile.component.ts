@@ -13,17 +13,25 @@ export class ProfileComponent implements OnInit {
   durationInSeconds = 5;
   showSpinner = false;
   errorMssg = false;
- 
+
   constructor(private service: ProfileServiceService, private snackBar: MatSnackBar) {
   }
   search() {
-    this.showSpinner = true;
+    if(!this.profile) {
+      this.snackBar.open('Provide Data', ' close ', {
+        duration: 2000,
+        verticalPosition: 'top'
+        
+      });
+      return ;
+    }
     const localData = localStorage.getItem(this.profile);
     if (localData) {
       this.response = JSON.parse(localData);
-      this.showSpinner = false;
       this.errorMssg = false;
     } else {
+      this.showSpinner = true;
+
       this.service.getProfileInfo(this.profile).subscribe(data => {
         this.response = data;
         localStorage.setItem(this.profile, JSON.stringify(this.response));
@@ -33,13 +41,15 @@ export class ProfileComponent implements OnInit {
         err => {
           this.showSpinner = false;
           this.errorMssg = true;
-          this.response=false;
+          this.response = false;
           this.snackBar.open(err.error.message, ' close ', {
             duration: 2000,
             verticalPosition: 'top'
           });
         });
     }
+    // tslint:disable-next-line:align
+    
 
   }
   ngOnInit() {
